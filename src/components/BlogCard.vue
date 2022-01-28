@@ -1,6 +1,6 @@
 <template>
   <div class="blog-card">
-    <div class="icons">
+    <div v-show="editPost" class="icons">
       <div class="icon">
         <Edit class="edit" />
       </div>
@@ -10,7 +10,7 @@
     </div>
     <img
       :src="require(`../assets/blogCards/${post.blogCoverPhoto}.jpg`)"
-      alt="#!"
+      alt=""
     />
     <div class="info">
       <h4>{{ post.blogTitle }}</h4>
@@ -33,6 +33,11 @@ export default {
     Edit,
     Delete,
   },
+  computed: {
+    editPost() {
+      return this.$store.state.editPost;
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>
@@ -43,7 +48,7 @@ export default {
   flex-direction: column;
   border-radius: 8px;
   background-color: #fff;
-  min-height: 420px;
+  min-height: 42px;
   transition: 0.5s ease all;
 
   &:hover {
@@ -94,7 +99,7 @@ export default {
     border-radius: 8px 8px 0 0;
     z-index: 1;
     width: 100%;
-    min-height: 200px;
+    min-height: 20px;
     object-fit: cover;
   }
 
