@@ -1,9 +1,11 @@
 <template>
   <div class="reset-password">
+    <Modal v-if="modalActive" v-on:close-modal="closeModal" />
+    <Loading v-if="loading" />
     <div class="form-wrap">
       <form class="reset">
         <h2>Reset password</h2>
-        <p>Forgot yout password? Enter your email to reset it</p>
+        <p>Forgot your password? Enter your email to reset it</p>
         <div class="inputs">
           <div class="input">
             <input type="text" placeholder="Email" v-model="email" />
@@ -19,10 +21,29 @@
 </template>
 <script>
 import email from "../assets/Icons/envelope-regular.svg";
+import Loading from "../components/Loading.vue";
+import Modal from "../components/Modal.vue";
+
 export default {
   name: "ForgotPassword",
+  data() {
+    return {
+      email: null,
+      modalActive: false,
+      modalMessage: "",
+      loading: null,
+    };
+  },
   components: {
     email,
+    Modal,
+    Loading,
+  },
+  methods: {
+    closeModal() {
+      this.modalActive = !this.modalActive;
+      this.email = "";
+    },
   },
 };
 </script>
